@@ -10,3 +10,4 @@ int main(){
   else if (c == 'Y') cout << 'R';
   else cout << 'Y';
   return 0;
+}
