@@ -1,0 +1,30 @@
+#include<iostream>
+using namespace std; const int N = 4e5 + 5;
+int q,ss[N],ls,lt,l,r; string s,t;
+int main(){
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  cin >> q >> s >> t;
+  ls = s.size(); lt = t.size();
+  s = ' ' + s; t = ' ' + t;
+  for (int i = 1;i <= ls - lt + 1;i++){
+    bool flag = 0;
+    for (int j = 1;j <= lt;j++)
+      if (s[i + j - 1] != t[j]){
+        flag = 1;
+        break;
+      }
+    if (!flag)
+      ss[i] = 1;
+    ss[i] += ss[i - 1];
+  }
+  while (q--){
+    cin >> l >> r;
+    if (r - l + 1 >= lt && (ss[r - lt + 1] - ss[l - 1] > 0))
+        cout << "Yes\n";
+    else
+        cout << "No\n";
+  }
+  return 0;
+}
