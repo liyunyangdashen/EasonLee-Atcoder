@@ -1,0 +1,39 @@
+#include<iostream>
+#include<set>
+using namespace std; const int N = 3e5 + 5;
+int n,q,x[N]; char c[N],a[N]; bool op[N]; set<int> st;
+void flp(int k){if (st.count(k)) st.erase(k); else st.insert(k);}
+int main(){
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  cin >> n >> q;
+  for (int i = 1;i <= n;i++)
+    st.insert(i);
+  for (int i = 1;i <= q;i++){
+    int abc;
+    cin >> abc; op[i] = abc - 1;
+    if (op[i])
+      cin >> c[i];
+    else{
+      cin >> x[i];
+      flp(x[i]);
+    }
+  }
+  for (int i = q;i >= 1;i--){
+    if (op[i]){
+      for (auto j : st)
+        a[j] = c[i];
+      st.clear();
+    }else
+      if (!a[x[i]])
+        flp(x[i]);
+  }
+  for (int i = 1;i <= n;i++){
+    if (a[i])
+      cout << a[i];
+    else
+      cout << 'a';
+  }
+  return 0;
+}
