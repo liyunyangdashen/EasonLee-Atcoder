@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std; const int N = 5e5 + 5,M = 2e5 + 5;
+int n,m,l[M],r[M],c[M],a[N],cnt = 0,nxt[N]; 
+int findRt(int x){if (nxt[x] == x) return x; return nxt[x] = findRt(nxt[x]);}
+int main(){
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  cin >> n >> m;
+  for (int i = 1;i <= n + 1;i++)
+    nxt[i] = i;
+  for (int i = 1;i <= m;i++)
+    cin >> l[i] >> r[i] >> c[i]; 
+  for (int i = m;i >= 1;i--){
+    int j = findRt(l[i]);
+    while (j <= r[i]){
+      a[j] = c[i];
+      nxt[j] = findRt(j + 1);
+      j = findRt(j);
+    }
+    if (cnt == n) break;
+  }
+  for (int i = 1;i <= n;i++)
+    cout << a[i] << ' ';
+  return 0;
+}
