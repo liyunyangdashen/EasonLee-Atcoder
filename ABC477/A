@@ -1,0 +1,12 @@
+#include<iostream>
+using namespace std; 
+char c;
+int main(){
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  cin >> c;
+  if (c == 'R') cout << 'B';
+  else if (c == 'Y') cout << 'R';
+  else cout << 'Y';
+  return 0;
