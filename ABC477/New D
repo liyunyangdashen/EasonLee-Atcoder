@@ -1,0 +1,43 @@
+#include<iostream>
+using namespace std; const int N = 3e5 + 5;
+int n,q,x[N],nxt[N]; char c[N],a[N]; bool op[N],b[N];
+int findRt(int x){if (nxt[x] == x) return x; return nxt[x] = findRt(nxt[x]);}
+int main(){
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  cin >> n >> q;
+  for (int i = 1;i <= n + 1;i++)
+    nxt[i] = i;
+  for (int i = 1;i <= q;i++){
+    int abc;
+    cin >> abc; op[i] = abc - 1;
+    if (op[i])
+      cin >> c[i];
+    else{
+      cin >> x[i];
+      b[x[i]] ^= 1;
+    }
+  }
+  for (int i = q;i >= 1;i--){
+    if (op[i]){
+      int j = findRt(1);
+      while (j <= n){
+        if (!b[j]){
+          a[j] = c[i];
+          nxt[j] = findRt(j + 1);
+          j = findRt(j);
+        }else
+          j++;
+      }
+    }else
+      b[x[i]] ^= 1;
+  }
+  for (int i = 1;i <= n;i++){
+    if (a[i])
+      cout << a[i];
+    else
+      cout << 'a';
+  }
+  return 0;
+}
