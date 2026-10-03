@@ -1,0 +1,30 @@
+#include<iostream>
+#include<vector>
+#include<cstring>
+using namespace std; const int N = 2e5 + 5,Q = N;
+int n,q,l,r,x,xx,sl[N],sr[N],t[N]; bool hx[N]; vector<int> sx;
+int main(){
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  cin >> n >> q;
+  memset(sl,0x3f,sizeof(sl));
+  memset(sr,-0x3f,sizeof(sr));
+  while (q--){
+    cin >> l >> r >> x;
+    sl[x] = min(sl[x],l);
+    sr[x] = max(sr[x],r);
+    if (!hx[x])
+      sx.push_back(x),
+      hx[x] = 1;
+  }
+  for (int x : sx)
+    if (sl[x] <= sr[x] && sl[x] <= n)
+      t[max(1,sl[x])]++,
+      t[min(n,sr[x]) + 1]--;
+  for (int i = 1;i <= n;i++){
+    t[i] += t[i - 1];
+    cout << t[i] << ' ';
+  }
+  return 0;
+}
