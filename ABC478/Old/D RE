@@ -1,0 +1,67 @@
+// #include<iostream>
+// using namespace std; const int N = 2e5 + 5;
+// int n,k,a[N],minn = 2e9,maxx = -2e9,l,r,posl[N],posr[N];
+// int main(){
+//   ios::sync_with_stdio(0);
+//   cin.tie(0);
+//   cout.tie(0);
+//   cin >> n >> k;
+//   for (int i = 1;i <= n;i++){
+//     cin >> a[i];
+//     minn = min(minn,a[i]);
+//     maxx = max(maxx,a[i]);
+//   }
+//   for (int i = 1;i <= n;i++){
+//     if (a[i] >= minn){
+//       minn = a[i];
+//       l = i;
+//       if (!posl[a[i]])
+//         posl[a[i]] = i;
+//     }else{
+//       l = posl[minn];
+//       break;
+//     }
+//   }
+//   for (int i = n;i >= 1;i--){
+//     if (a[i] <= maxx){
+//       minn = a[i];
+//       r = i;
+//       if (!posr[a[i]])
+//         posr[a[i]] = i;
+//     }else{
+//       l = posr[maxx];
+//       break;
+//     }
+//   }
+//   if (r - l + 1 <= k)
+//     cout << "Yes";
+//   else
+//     cout << "No";
+//   return 0;
+// }
+#include<iostream>
+#include<cstring>
+using namespace std; const int N = 2e5 + 5,Q = N;
+int n,q,l,r,x,xx; int sl[N],sr[N],t[N];
+int main(){
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  cin >> n >> q;
+  memset(sl,0x3f,sizeof(sl));
+  memset(sr,-0x3f,sizeof(sr));
+  while (q--){
+    cin >> l >> r >> x;
+    sl[x] = min(sl[x],l);
+    sr[x] = max(sr[x],r);
+    xx = max(xx,x);
+  }
+  for (int i = 1;i <= xx;i++)
+    t[sl[i]]++,
+    t[sr[i] + 1]--;
+  for (int i = 1;i <= n;i++){
+    t[i] += t[i - 1];
+    cout << t[i] << ' ';
+  }
+  return 0;
+}
