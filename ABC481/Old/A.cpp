@@ -1,14 +1,16 @@
 #include<iostream>
 using namespace std; 
-int a,b;
+int a,b,s = 0;
 int main(){
   ios::sync_with_stdio(0);
   cin.tie(0);
   cout.tie(0);
   cin >> a >> b;
-  if (a + b / 10)
-    cout << 2;
-  else
-    cout << 1;
+  a += b;
+  while (a){
+    s++;
+    a /= 10;
+  }
+  cout << s;
   return 0;
 }
